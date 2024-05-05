@@ -43,9 +43,9 @@ function App() {
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md p-4 flex flex-col h-screen overflow-y-auto">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
       <div className='w-1/2 m-auto '>
-        <div class="flex flex-col gap-1 overflow-y-auto max-h-full max-w-full text-white text-xl">
+        <div class="flex flex-col gap-1 overflow-y-auto max-h-full max-w-full text-white text-xl items-center justify-center">
           {messages.map((message) => (
-            <div class="m-auto" key={message.text} className={`message ${message.sender}`}>
+            <div key={message.text} className={`message ${message.sender}`}>
               {message.text}
             </div>
           ))}
