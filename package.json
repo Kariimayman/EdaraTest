@@ -2,7 +2,7 @@
   "name": "edara-test",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://kariimayman.github.io/EdaraTest/",
   "dependencies": {
     "@google/generative-ai": "^0.10.0",
     "@testing-library/jest-dom": "^5.17.0",
