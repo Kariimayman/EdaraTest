@@ -39,7 +39,7 @@ function App() {
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
-          'x-goog-user-project': projectId,
+          'x-goog-user-project': "arctic-cursor-422617-e0",
         };
 
         const response = await axios.get(url, { headers });
