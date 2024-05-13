@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleLogin } from '@react-oauth/google';
 import './App.css';
@@ -30,6 +30,10 @@ function App() {
       sendMessage();
     }
   };
+  function getAccessTokenFromUrl(url) {
+    const params = new URLSearchParams(url.split('#')[1]); // Split URL to access query string after #
+    return params.get('access_token');
+  }
   const fetchData = async (Token) => {
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
@@ -58,6 +62,14 @@ function App() {
   const errorMessage = (error) => {
     console.log(error);
   };
+  useEffect(() => {
+    const accessToken = getAccessTokenFromUrl(window.location.search);
+    console.log(accessToken)
+    if(accessToken){
+      fetchData(accessToken);
+      setUser(accessToken)
+    }
+  }, []);
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
