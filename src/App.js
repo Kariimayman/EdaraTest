@@ -51,8 +51,7 @@ function App() {
   };
   const responseMessage = async (response) => {
     setUser(response)
-    const data = await response.json()
-    console.log(data.credential);
+    console.log(response.credential);
     fetchData(data.credential)
     console.log(response);
   };
