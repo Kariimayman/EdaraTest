@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleLogin } from '@react-oauth/google';
 import './App.css';
+import axios from 'axios'; // Assuming you're using Axios for HTTP requests
 function App() {
   const [message, setMessage] = useState("مرحباً، يسعدني مساعدتك اليوم. كيف يمكنني مساعدتك؟");
   const [userInput, setUserInput] = useState('');
@@ -34,20 +35,14 @@ function App() {
   const fetchData = async (prompt) => {
     console.log("fetching data")
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
+      const url = "https://generativelanguage.googleapis.com/v1beta//tunedModels/edarachatbot2";
+        const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
-          'x-goog-user-project': "arctic-cursor-422617-e0",
-        }, data: {
-          "contents": [{
-            "parts": [{
-              "text": prompt
-            }]
-          }]
-        }
-      });
+          'x-goog-user-project': projectId,
+        };
+
+        const response = await axios.get(url, { headers });
 
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
