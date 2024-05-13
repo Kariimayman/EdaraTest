@@ -36,6 +36,7 @@ function App() {
     return params.get('access_token');
   }
   const fetchData = async (Token) => {
+    console.log("fetching data")
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
         headers: {
@@ -52,6 +53,7 @@ function App() {
       console.log(data)
 
     } catch (error) {
+      console.log(error)
     }
   };
   const handleClick = async () => {
@@ -88,7 +90,6 @@ function App() {
   };
   useEffect(() => {
     const accessToken = getAccessTokenFromUrl(window.location.href);
-    console.log(accessToken)
     if (accessToken) {
       fetchData(accessToken);
       setUser(accessToken)
