@@ -52,7 +52,7 @@ function App() {
   const responseMessage = async (response) => {
     setUser(response)
     console.log(response.credential);
-    fetchData(data.credential)
+    fetchData(response.credential)
     console.log(response);
   };
   const errorMessage = (error) => {
