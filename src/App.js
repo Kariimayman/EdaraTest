@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [message, setMessage] = useState("مرحباً، يسعدني مساعدتك اليوم. كيف يمكنني مساعدتك؟");
   const [userInput, setUserInput] = useState('');
+  const [user, setUser] = useState('');
 
   const handleUserInput = (event) => {
     setUserInput(event.target.value);
@@ -29,17 +30,40 @@ function App() {
       sendMessage();
     }
   };
-  const responseMessage = (response) => {
+  const fetchData = async (Token) => {
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Token}`,
+          'x-goog-user-project': "arctic-cursor-422617-e0",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+    }
+  };
+  const responseMessage = async (response) => {
+    setUser(response)
+    const data = await response.json()
+    console.log(data.credential);
+    fetchData(data.credential)
     console.log(response);
-};
-const errorMessage = (error) => {
+  };
+  const errorMessage = (error) => {
     console.log(error);
-};
+  };
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
       <div className='pt-10'>
-        <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+        {user == '' ? (<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />) : (<></>)}
         <div class="flex items-center justify-center ">
           <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
             {message}
