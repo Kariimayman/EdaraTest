@@ -36,6 +36,7 @@ function App() {
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent`, {
         headers: {
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
           'x-goog-user-project': "arctic-cursor-422617-e0",
