@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/EdaraTest/static/css/main.718f7682.css",
-    "main.js": "/EdaraTest/static/js/main.ba19fd0e.js",
+    "main.js": "/EdaraTest/static/js/main.a8a9f3af.js",
     "static/js/453.f0844aec.chunk.js": "/EdaraTest/static/js/453.f0844aec.chunk.js",
     "index.html": "/EdaraTest/index.html",
     "main.718f7682.css.map": "/EdaraTest/static/css/main.718f7682.css.map",
-    "main.ba19fd0e.js.map": "/EdaraTest/static/js/main.ba19fd0e.js.map",
+    "main.a8a9f3af.js.map": "/EdaraTest/static/js/main.a8a9f3af.js.map",
     "453.f0844aec.chunk.js.map": "/EdaraTest/static/js/453.f0844aec.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.718f7682.css",
-    "static/js/main.ba19fd0e.js"
+    "static/js/main.a8a9f3af.js"
   ]
 }
