@@ -30,51 +30,18 @@ function App() {
       sendMessage();
     }
   };
-  function getAccessTokenFromUrl(url) {
-    const params = new URLSearchParams(url.split('#')[1]); // Split URL to access query string after #
-    return params.get('access_token');
-  }
-  const fetchData = async (Token) => {
-    try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Token}`,
-          'x-goog-user-project': "arctic-cursor-422617-e0",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data)
-
-    } catch (error) {
-    }
-  };
-  const responseMessage = async (response) => {
-    setUser(response)
-    console.log(response.credential);
-    fetchData(response.credential)
+  const responseMessage = (response) => {
+    setUser( response)
     console.log(response);
-  };
-  const errorMessage = (error) => {
+};
+const errorMessage = (error) => {
     console.log(error);
-  };
-  useEffect(() => {
-    const accessToken = getAccessTokenFromUrl(window.location.search);
-    console.log(accessToken)
-    if(accessToken){
-      fetchData(accessToken);
-      setUser(accessToken)
-    }
-  }, []);
+};
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
       <div className='pt-10'>
-        {user == '' ? (<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />) : (<></>)}
+        {user == "" ? (<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />) : ()}
         <div class="flex items-center justify-center ">
           <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
             {message}
