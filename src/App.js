@@ -31,6 +31,7 @@ function App() {
     }
   };
   function getAccessTokenFromUrl(url) {
+    console.log(url)
     const params = new URLSearchParams(url.split('#')[1]); // Split URL to access query string after #
     return params.get('access_token');
   }
