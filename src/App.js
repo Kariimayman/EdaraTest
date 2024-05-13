@@ -34,7 +34,7 @@ function App() {
   const fetchData = async (prompt) => {
     console.log("fetching data")
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
@@ -53,6 +53,7 @@ function App() {
         throw new Error(`API request failed with status ${response.status}`);
       }
       const data = await response.json();
+      console.log(data)
       console.log(data.candidates.content.parts.text)
       return data.candidates.content.parts.text
     } catch (error) {
