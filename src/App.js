@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const [message, setMessage] = useState("مرحباً، يسعدني مساعدتك اليوم. كيف يمكنني مساعدتك؟");
   const [userInput, setUserInput] = useState('');
-  const [user, setUser] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
   const handleUserInput = (event) => {
     setUserInput(event.target.value);
@@ -14,12 +14,7 @@ function App() {
   async function sendMessage() {
     if (userInput.trim() !== '') {
       setMessage("Loading....");
-      const genAI = new GoogleGenerativeAI('AIzaSyCkM44TR33a0FomGDszGbuBnzyJL1pjg08');
-      const model = genAI.getGenerativeModel({ model: "tunedModels/edarachatbot2" });
-      const prompt = userInput;
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      var text = fetchData(userInput)
       setUserInput("")
       setMessage(text);
     }
@@ -33,27 +28,35 @@ function App() {
   function getAccessTokenFromUrl(url) {
     console.log(url)
     const params = new URLSearchParams(url.split('#')[1]); // Split URL to access query string after #
-    return params.get('access_token');
+    console.log(params.get('access_token'))
+    setAccessToken(params.get('access_token'));
   }
-  const fetchData = async (Token) => {
+  const fetchData = async (prompt) => {
     console.log("fetching data")
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Token}`,
+          Authorization: `Bearer ${accessToken}`,
           'x-goog-user-project': "arctic-cursor-422617-e0",
-        },
+        }, data: {
+          "contents": [{
+            "parts": [{
+              "text": prompt
+            }]
+          }]
+        }
       });
 
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
       const data = await response.json();
-      console.log(data)
-
+      console.log(data.candidates.content.parts.text)
+      return data.candidates.content.parts.text
     } catch (error) {
       console.log(error)
+      return "something went wrong"
     }
   };
   const handleClick = async () => {
@@ -89,38 +92,34 @@ function App() {
     }
   };
   useEffect(() => {
-    const accessToken = getAccessTokenFromUrl(window.location.href);
-    if (accessToken) {
-      fetchData(accessToken);
-      setUser(accessToken)
-    }
+    getAccessTokenFromUrl(window.location.href);
   }, []);
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
-      <div className='pt-10'>
-        {user == "" ? (<button onClick={handleClick}>Sign in with Google</button>) : (<></>)}
+      {accessToken == null? (<button onClick={handleClick}>Sign in with Google</button>) : (<><div className='pt-10'>
         <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
           {message}
         </div>
       </div>
-      <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
+        <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
 
-        <input
-          type="text"
-          class="rounded-md py-2 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center w-full"
-          value={userInput}
-          onChange={handleUserInput}
-          onKeyPress={handleKeyPress}
-          placeholder=""
-        />
-        <button
-          class="bg-indigo-500 text-white hover:bg-indigo-700 font-bold py-2 px-4 rounded-md shadow-sm"
-          onClick={sendMessage}
-        >
-          Send
-        </button>
-      </div>
+          <input
+            type="text"
+            class="rounded-md py-2 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center w-full"
+            value={userInput}
+            onChange={handleUserInput}
+            onKeyPress={handleKeyPress}
+            placeholder=""
+          />
+          <button
+            class="bg-indigo-500 text-white hover:bg-indigo-700 font-bold py-2 px-4 rounded-md shadow-sm"
+            onClick={sendMessage}
+          >
+            Send
+          </button>
+        </div></>)}
+
     </div>
   );
 }
