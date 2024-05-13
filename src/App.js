@@ -37,20 +37,29 @@ function App() {
     try {
       const url = "https://generativelanguage.googleapis.com/v1beta//tunedModels/edarachatbot2";
         const headers = {
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
           'x-goog-user-project': "arctic-cursor-422617-e0",
         };
-
-        const response = await axios.get(url, { headers });
-
+        const data = {
+          contents: [{
+            parts: [{
+              prompt,
+            }],
+          }],
+        };
+        const response = await axios.post(url, data, { headers });
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
-      const data = await response.json();
-      console.log(data)
-      console.log(data.candidates.content.parts.text)
-      return data.candidates.content.parts.text
+      console.log(response)
+      console.log(response.data)
+
+      const jsondata = await response.json();
+      console.log(jsondata)
+      console.log(jsondata.candidates.content.parts.text)
+      return jsondata.candidates.content.parts.text
     } catch (error) {
       console.log(error)
       return "something went wrong"
