@@ -87,7 +87,7 @@ function App() {
     }
   };
   useEffect(() => {
-    const accessToken = getAccessTokenFromUrl(window.location.search);
+    const accessToken = getAccessTokenFromUrl(window.location.href);
     console.log(accessToken)
     if (accessToken) {
       fetchData(accessToken);
