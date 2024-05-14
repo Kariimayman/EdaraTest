@@ -55,12 +55,9 @@ function App() {
     };
       const response = await axios.post(url, data, { headers });
       console.log(response)
-      console.log(response.data)
-
-      const jsondata = await response.json();
-      console.log(jsondata)
-      console.log(jsondata.candidates.content.parts.text)
-      return jsondata.candidates.content.parts.text
+      console.log(response.data.candidates.content.parts.text)
+      console.log(response.candidates.content.parts.text)
+      return response.data.candidates.content.parts.text
     } catch (error) {
       console.log(error)
       return "something went wrong"
