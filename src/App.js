@@ -39,7 +39,7 @@ function App() {
       threshold: "BLOCK_LOW_AND_ABOVE"
     };
     try {
-      const url = "https://generativelanguage.googleapis.com/v1beta/{model=tunedModels/edarachatbot2}:generateText";
+      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateText';
       const headers = {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
