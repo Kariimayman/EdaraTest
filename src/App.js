@@ -43,12 +43,23 @@ function App() {
           'x-goog-user-project': "arctic-cursor-422617-e0",
         };
         const data = {
-          contents: [{
-            parts: [{
-              prompt,
-            }],
-          }],
-        };
+  "prompt": {
+    {
+  "text": prompt
+}
+  },
+  "safetySettings": [
+    {
+{
+  "category": "HARM_CATEGORY_DEROGATORY",
+  "threshold": "BLOCK_LOW_AND_ABOVE"
+}    }
+  ],
+  "stopSequences": [
+    string
+  ],
+  "temperature": 0.9,
+};
         const response = await axios.post(url, data, { headers });
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
@@ -86,7 +97,7 @@ function App() {
       url.searchParams.set('state', 'pass-through-value'); // Optional state parameter
 
       // Open the authorization URL in a new window
-      window.open(url.toString(), '_blank');
+      window.location.href = url.toString();
 
       // **Handle redirect in your backend (cannot access token in frontend):**
       // Your server-side code should handle the redirect URI and extract the access token from the URL parameters.
