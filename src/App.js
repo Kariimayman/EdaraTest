@@ -16,6 +16,7 @@ function App() {
     if (userInput.trim() !== '') {
       setMessage("Loading....");
       var text = fetchData(userInput)
+      console.log(text)
       setUserInput("")
       setMessage(text);
     }
@@ -56,7 +57,7 @@ function App() {
       const response = await axios.post(url, data, { headers });
       console.log(response)
       const generatedText = response.data.candidates[0].content.parts[0].text;
-      return generatedText
+      return generatedText.toString();
     } catch (error) {
       console.log(error)
       return "something went wrong"
