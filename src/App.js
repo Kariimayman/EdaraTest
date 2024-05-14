@@ -39,7 +39,7 @@ function App() {
       threshold: "BLOCK_LOW_AND_ABOVE"
     };
     try {
-      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateText';
+      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
@@ -47,12 +47,17 @@ function App() {
         'x-goog-user-project': "arctic-cursor-422617-e0",
       };
       const data = {
-        prompt: {
-          text: prompt, 
-        },
-        safetySettings: [safetySetting], 
-        temperature: 0.9, 
-      };
+        contents: [
+            {
+                parts: [
+                    {
+                        text: prompt
+                    }
+                ],
+                role: "user"
+            }
+        ]
+    };
       const response = await axios.post(url, data, { headers });
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
