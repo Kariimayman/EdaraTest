@@ -35,32 +35,30 @@ function App() {
   const fetchData = async (prompt) => {
     console.log("fetching data")
     try {
-      const url = "https://generativelanguage.googleapis.com/tunedModels/edarachatbot2:generateContent";
-        const headers = {
-          "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-          'x-goog-user-project': "arctic-cursor-422617-e0",
-        };
-        const data = {
-  "prompt": {
-    {
-  "text": prompt
-}
-  },
-  "safetySettings": [
-    {
-{
-  "category": "HARM_CATEGORY_DEROGATORY",
-  "threshold": "BLOCK_LOW_AND_ABOVE"
-}    }
-  ],
-  "stopSequences": [
-    string
-  ],
-  "temperature": 0.9,
-};
-        const response = await axios.post(url, data, { headers });
+      const url = "https://generativelanguage.googleapis.com/v1beta/{model=tunedModels/edarachatbot2}:generateText";
+      const headers = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+        'x-goog-user-project': "arctic-cursor-422617-e0",
+      };
+      const data = {
+        "prompt": {
+          "text": prompt
+        }
+        ,
+        "safetySettings": [
+          {
+            "category": "HARM_CATEGORY_DEROGATORY",
+            "threshold": "BLOCK_LOW_AND_ABOVE"
+          }
+        ],
+        "stopSequences": [
+          string
+        ],
+        "temperature": 0.9,
+      };
+      const response = await axios.post(url, data, { headers });
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
