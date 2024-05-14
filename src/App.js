@@ -15,7 +15,7 @@ function App() {
   async function sendMessage() {
     if (userInput.trim() !== '') {
       setMessage("Loading....");
-      var text = fetchData(userInput)
+      var text = await  fetchData(userInput)
       console.log(text)
       setUserInput("")
       setMessage(text);
