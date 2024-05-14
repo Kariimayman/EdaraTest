@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleLogin } from '@react-oauth/google';
 import './App.css';
 import axios from 'axios'; // Assuming you're using Axios for HTTP requests
 function App() {
@@ -15,7 +13,7 @@ function App() {
   async function sendMessage() {
     if (userInput.trim() !== '') {
       setMessage("Loading....");
-      var text = await  fetchData(userInput)
+      var text = await fetchData(userInput)
       console.log(text)
       setUserInput("")
       setMessage(text);
@@ -34,7 +32,7 @@ function App() {
     setAccessToken(params.get('access_token'));
   }
   const fetchData = async (prompt) => {
-    console.log("fetching data for " +prompt )
+    console.log("fetching data for " + prompt)
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
@@ -101,28 +99,33 @@ function App() {
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
-      {accessToken == null ? (<button onClick={handleClick}>Sign in with Google</button>) : (<><div className='pt-10'>
-        <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-          {message}
+      {accessToken == null ? (
+        <div className='pt-20 flex items-center justify-center'>
+          <button className='message-bubble rounded-lg bg-indigo-800 hover:bg-white hover:text-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleClick}>Sign in with Google</button>
         </div>
-      </div>
-        <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
+      ) :
+        (<><div className='pt-10'>
+          <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
+            {message}
+          </div>
+        </div>
+          <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
 
-          <input
-            type="text"
-            class="rounded-md py-2 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center w-full"
-            value={userInput}
-            onChange={handleUserInput}
-            onKeyPress={handleKeyPress}
-            placeholder=""
-          />
-          <button
-            class="bg-indigo-500 text-white hover:bg-indigo-700 font-bold py-2 px-4 rounded-md shadow-sm"
-            onClick={sendMessage}
-          >
-            Send
-          </button>
-        </div></>)}
+            <input
+              type="text"
+              class="rounded-md py-2 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center w-full"
+              value={userInput}
+              onChange={handleUserInput}
+              onKeyPress={handleKeyPress}
+              placeholder=""
+            />
+            <button
+              class="bg-indigo-500 text-white hover:bg-indigo-700 font-bold py-2 px-4 rounded-md shadow-sm"
+              onClick={sendMessage}
+            >
+              Send
+            </button>
+          </div></>)}
 
     </div>
   );
