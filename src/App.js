@@ -37,7 +37,7 @@ function App() {
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
         'x-goog-user-project': "arctic-cursor-422617-e0",
       };
@@ -46,7 +46,7 @@ function App() {
             {
                 parts: [
                     {
-                        text: "test prompt"
+                        text: "hello there"
                     }
                 ],
                 role: "user"
