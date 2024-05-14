@@ -54,12 +54,8 @@ function App() {
         ]
       };
       const response = await axios.post(url, data, { headers });
-      console.log(response)
       const generatedText = response.data.candidates[0].content.parts[0].text;
-      console.log("Generated Text:", generatedText);
-      console.log(response.candidates.content.parts.text)
-      console.log(response.data.candidates.content.parts.text)
-      return response.candidates.content.parts.text
+      return generatedText
     } catch (error) {
       console.log(error)
       return "something went wrong"
