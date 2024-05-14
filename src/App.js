@@ -54,9 +54,6 @@ function App() {
         ]
     };
       const response = await axios.post(url, data, { headers });
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
       console.log(response)
       console.log(response.data)
 
