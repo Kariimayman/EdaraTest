@@ -53,9 +53,6 @@ function App() {
             "threshold": "BLOCK_LOW_AND_ABOVE"
           }
         ],
-        "stopSequences": [
-          string
-        ],
         "temperature": 0.9,
       };
       const response = await axios.post(url, data, { headers });
