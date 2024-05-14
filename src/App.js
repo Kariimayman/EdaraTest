@@ -34,6 +34,10 @@ function App() {
   }
   const fetchData = async (prompt) => {
     console.log("fetching data")
+    const safetySetting = {
+      category: "HARM_CATEGORY_DEROGATORY",
+      threshold: "BLOCK_LOW_AND_ABOVE"
+    };
     try {
       const url = "https://generativelanguage.googleapis.com/v1beta/{model=tunedModels/edarachatbot2}:generateText";
       const headers = {
@@ -43,17 +47,11 @@ function App() {
         'x-goog-user-project': "arctic-cursor-422617-e0",
       };
       const data = {
-        "prompt": {
-          "text": prompt
-        }
-        ,
-        "safetySettings": [
-          {
-            "category": "HARM_CATEGORY_DEROGATORY",
-            "threshold": "BLOCK_LOW_AND_ABOVE"
-          }
-        ],
-        "temperature": 0.9,
+        prompt: {
+          text: prompt, 
+        },
+        safetySettings: [safetySetting], 
+        temperature: 0.9, 
       };
       const response = await axios.post(url, data, { headers });
       if (!response.ok) {
