@@ -33,7 +33,7 @@ function App() {
     setAccessToken(params.get('access_token'));
   }
   const fetchData = async (prompt) => {
-    console.log("fetching data")
+    console.log("fetching data for " +prompt )
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
@@ -54,6 +54,7 @@ function App() {
         ]
       };
       const response = await axios.post(url, data, { headers });
+      console.log(response)
       const generatedText = response.data.candidates[0].content.parts[0].text;
       return generatedText
     } catch (error) {
