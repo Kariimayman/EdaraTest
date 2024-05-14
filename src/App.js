@@ -34,10 +34,6 @@ function App() {
   }
   const fetchData = async (prompt) => {
     console.log("fetching data")
-    const safetySetting = {
-      category: "HARM_CATEGORY_DEROGATORY",
-      threshold: "BLOCK_LOW_AND_ABOVE"
-    };
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
@@ -51,7 +47,7 @@ function App() {
             {
                 parts: [
                     {
-                        text: prompt
+                        text: "test prompt"
                     }
                 ],
                 role: "user"
