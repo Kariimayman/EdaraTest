@@ -46,7 +46,7 @@ function App() {
           {
             parts: [
               {
-                text: "hello there"
+                text: prompt
               }
             ],
             role: "user"
