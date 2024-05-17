@@ -55,8 +55,7 @@ function App() {
       const response = await axios.post(url, data, { headers });
       console.log(response)
       const generatedText = response.data.candidates[0].content.parts[0].text;
-      console.log(generatedText.toString())
-      return generatedText;
+      return generatedText.toString();
     } catch (error) {
       console.log(error)
       return "something went wrong"
@@ -107,7 +106,7 @@ function App() {
       ) :
         (<><div className='pt-10'>
           <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-            {message}
+            {message.toString()}
           </div>
         </div>
           <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
