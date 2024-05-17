@@ -35,7 +35,7 @@ function App() {
   const fetchData = async (prompt) => {
     console.log("fetching data")
     try {
-      const url = "https://generativelanguage.googleapis.com/tunedModels/edarachatbot2:generateContent";
+      const url = "https://generativelanguage.googleapis.com/tunedModels/edarachatbot4:generateContent";
         const headers = {
           "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
