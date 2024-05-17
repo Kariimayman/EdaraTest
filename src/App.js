@@ -15,7 +15,6 @@ function App() {
       setMessage("Loading....");
       var text = await fetchData(userInput)
       console.log(text)
-      setUserInput("")
       setMessage(text);
     }
   };
