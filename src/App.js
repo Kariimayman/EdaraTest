@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios'; // Assuming you're using Axios for HTTP requests
 function App() {
-  const [message, setMessage] = useState("مرحباً، يسعدني مساعدتك اليوم. كيف يمكنني مساعدتك؟");
+  const [Edaramessage, setEdaramessage] = useState("مرحباً، يسعدني مساعدتك اليوم. كيف يمكنني مساعدتك؟");
+  const [Geminimessage, setGeminimessage] = useState("");
+
   const [userInput, setUserInput] = useState('');
   const [accessToken, setAccessToken] = useState('');
 
@@ -12,10 +14,13 @@ function App() {
 
   async function sendMessage() {
     if (userInput.trim() !== '') {
-      setMessage("Loading....");
-      var text = await fetchData(userInput)
-      console.log(text)
-      setMessage(text);
+      setEdaramessage("Loading....");
+      var text1 = await fetchEdaraData(userInput)
+      var text2 = await fetchGeminiData(userInput)
+      console.log(text1)
+      console.log(text2)
+      setEdaramessage(text1);
+      setGeminimessage(text2)
     }
   };
 
@@ -30,7 +35,7 @@ function App() {
     console.log(params.get('access_token'))
     setAccessToken(params.get('access_token'));
   }
-  const fetchData = async (prompt) => {
+  const fetchEdaraData = async (prompt) => {
     console.log("fetching data for " + prompt)
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot5:generateContent';
@@ -54,7 +59,37 @@ function App() {
       const response = await axios.post(url, data, { headers });
       console.log(response)
       const generatedText = response.data.candidates[0].content.parts[0].text;
-      return generatedText.toString();
+      return generatedText;
+    } catch (error) {
+      console.log(error)
+      return "something went wrong"
+    }
+  };
+  const fetchGeminiData = async (prompt) => {
+    console.log("fetching data for " + prompt)
+    try {
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+      const headers = {
+        // 'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+        'x-goog-user-project': "arctic-cursor-422617-e0",
+      };
+      const data = {
+        contents: [
+          {
+            parts: [
+              {
+                text: prompt
+              }
+            ],
+            role: "user"
+          }
+        ]
+      };
+      const response = await axios.post(url, data, { headers });
+      console.log(response)
+      const generatedText = response.data.candidates[0].content.parts[0].text;
+      return generatedText;
     } catch (error) {
       console.log(error)
       return "something went wrong"
@@ -102,7 +137,7 @@ function App() {
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
-      {accessToken == null ? (
+      {accessToken != null ? (
         <div className='pt-20 flex items-center justify-center'>
           <button className='message-bubble rounded-lg bg-indigo-800 hover:bg-white hover:text-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleClick}>Sign in with Google</button>
         </div>
@@ -110,10 +145,18 @@ function App() {
         (<>
 
           <div className='pt-10'>
+          <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
+
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-              {message.toString()}
+              {Edaramessage}
             </div>
 
+          </div>
+          <div className='pt-10'>
+          <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
+            <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
+              {Geminimessage}
+            </div>
           </div>
           <div className='pt-20 flex items-center justify-center'>
             <button className='message-bubble rounded-lg bg-red-500 hover:bg-white hover:text-red-500 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>Logout</button>
