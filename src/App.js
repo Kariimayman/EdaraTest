@@ -137,7 +137,7 @@ function App() {
   return (
     <div class="chat-container bg-gradient-to-r from-indigo-500 to-purple-600  max-h-full rounded-xl shadow-md flex flex-col h-screen overflow-y-auto p-10">
       <h2 class="text-5xl text-white font-bold mb-4 text-center">Chat with EdaraBot</h2>
-      {accessToken != null ? (
+      {accessToken == null ? (
         <div className='pt-20 flex items-center justify-center'>
           <button className='message-bubble rounded-lg bg-indigo-800 hover:bg-white hover:text-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleClick}>Sign in with Google</button>
         </div>
