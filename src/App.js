@@ -108,14 +108,16 @@ function App() {
         </div>
       ) :
         (<>
-        <div className='pt-20 flex items-center justify-center'>
-          <button className='message-bubble rounded-lg bg-red hover:bg-white hover:text-red-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>LogOut</button>
-        </div>
-        <div className='pt-10'>
-          <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-            {message.toString()}
+
+          <div className='pt-10'>
+            <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
+              {message.toString()}
+            </div>
+
           </div>
-        </div>
+          <div className='pt-20 flex items-center justify-center'>
+            <button className='message-bubble rounded-lg bg-red-500 hover:bg-white hover:text-red-500 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>Logout</button>
+          </div>
           <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
 
             <input
