@@ -97,6 +97,7 @@ function App() {
   };
   const handleLogout = async () => {
     setAccessToken(null)
+    window.location.href = "https://kariimayman.github.io/EdaraTest/"
   }
   const handleClick = async () => {
     try {
