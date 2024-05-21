@@ -60,6 +60,9 @@ function App() {
       return "something went wrong"
     }
   };
+  const handleLogout = async () => {
+    setAccessToken(null)
+  }
   const handleClick = async () => {
     try {
       // Replace with your actual client ID and redirect URI
@@ -70,6 +73,7 @@ function App() {
       if (!clientId || !redirectUri) {
         throw new Error('Missing client ID or redirect URI');
       }
+
 
       // Create the OAuth 2.0 authorization URL with secure parameters
       const url = new URL('https://accounts.google.com/o/oauth2/v2/auth');
@@ -103,7 +107,11 @@ function App() {
           <button className='message-bubble rounded-lg bg-indigo-800 hover:bg-white hover:text-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleClick}>Sign in with Google</button>
         </div>
       ) :
-        (<><div className='pt-10'>
+        (<>
+        <div className='pt-20 flex items-center justify-center'>
+          <button className='message-bubble rounded-lg bg-red hover:bg-white hover:text-red-800 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>LogOut</button>
+        </div>
+        <div className='pt-10'>
           <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
             {message.toString()}
           </div>
