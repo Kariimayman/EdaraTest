@@ -15,6 +15,7 @@ function App() {
   async function sendMessage() {
     if (userInput.trim() !== '') {
       setEdaramessage("Loading....");
+      setGeminimessage("Loading....");
       var text1 = await fetchEdaraData(userInput)
       var text2 = await fetchGeminiData(userInput)
       console.log(text1)
@@ -146,7 +147,7 @@ function App() {
         (<>
 
           <div className='pt-10'>
-          <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
+            <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
 
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
               {Edaramessage}
@@ -154,13 +155,14 @@ function App() {
 
           </div>
           <div className='pt-10'>
-          <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
+            <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
               {Geminimessage}
             </div>
           </div>
-          <div className='pt-20 flex items-center justify-center'>
-            <button className='message-bubble rounded-lg bg-red-500 hover:bg-white hover:text-red-500 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>Logout</button>
+          <div className='pt-20 flex items-center justify-center bg-gray-400'>
+            <h1 className=' px-4 py-4 text-white shadow-md text-center text-2xl'> IN CASE OF ERROR</h1>
+            <button className='message-bubble rounded-lg bg-red-500 hover:bg-white hover:text-red-500 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>Logout </button>
           </div>
           <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
 
