@@ -81,7 +81,7 @@ function App() {
       const headers = {
         // 'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        'x-goog-user-project': "arctic-cursor-422617-e0",
+        'x-goog-user-project': "edarachatbot",
       };
       const data = {
         contents: [
