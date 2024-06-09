@@ -11,6 +11,12 @@ function App() {
   const handleUserInput = (event) => {
     setUserInput(event.target.value);
   };
+  const formatText = (text) => {
+    return text
+      .replace(/\n/g, '<br>')          // Replace newline characters with <br>
+      .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); // Replace **bold** with <b>bold</b>
+  }
+  
 
   async function sendMessage() {
     if (userInput.trim() !== '') {
@@ -19,8 +25,10 @@ function App() {
       var text2 = await fetchGeminiData(userInput)
       console.log(text1)
       console.log(text2)
-      setEdaramessage(text1);
-      setGeminimessage(text2)
+      const formattedText1 = formatText(text1);
+      const formattedText2 = formatText(text2);
+      setEdaramessage(formattedText1);
+      setGeminimessage(formattedText2)
     }
   };
 
@@ -38,11 +46,11 @@ function App() {
   const fetchEdaraData = async (prompt) => {
     console.log("fetching data for " + prompt)
     try {
-      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot5:generateContent';
+      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot1:generateContent';
       const headers = {
         // 'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        'x-goog-user-project': "arctic-cursor-422617-e0",
+        'x-goog-user-project': "edarachatbot",
       };
       const data = {
         contents: [
@@ -102,7 +110,7 @@ function App() {
   const handleClick = async () => {
     try {
       // Replace with your actual client ID and redirect URI
-      const clientId = '468949745626-6ie6hru117829vti5f59hpt8rl3tsveu.apps.googleusercontent.com';
+      const clientId = '290807565570-okgo5imjblcesi2vkcqbt13mlv44m87e.apps.googleusercontent.com';
       const redirectUri = 'https://kariimayman.github.io/EdaraTest';
 
       // Ensure client ID and redirect URI are valid
@@ -149,8 +157,7 @@ function App() {
           <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
 
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-              {Edaramessage}
-            </div>
+            <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" dangerouslySetInnerHTML={{ __html: Edaramessage }}></div>            </div>
 
           </div>
           <div className='pt-10'>
