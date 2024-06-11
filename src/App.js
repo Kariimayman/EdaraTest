@@ -47,7 +47,7 @@ function App() {
   const fetchEdaraData = async (prompt) => {
     console.log("fetching data for " + prompt)
     try {
-      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot1:generateContent';
+      const url = 'https://generativelanguage.googleapis.com/v1beta/tunedModels/edarachatbot2:generateContent';
       const headers = {
         // 'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
