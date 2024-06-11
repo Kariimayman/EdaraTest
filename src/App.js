@@ -16,7 +16,7 @@ function App() {
       .replace(/\n/g, '<br>')          // Replace newline characters with <br>
       .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); // Replace **bold** with <b>bold</b>
   }
-  
+
 
   async function sendMessage() {
     if (userInput.trim() !== '') {
@@ -155,19 +155,19 @@ function App() {
         (<>
 
           <div className='pt-10'>
-          <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
+            <h1 className='px-4 py-4 text-white shadow-md text-center text-4xl'>EdaraBot</h1>
 
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-            <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" dangerouslySetInnerHTML={{ __html: Edaramessage }}></div>            </div>
+              <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" dangerouslySetInnerHTML={{ __html: Edaramessage }}></div>            </div>
 
           </div>
           <div className='pt-10'>
-          <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
+            <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-              {Geminimessage}
-            </div>
+              <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" dangerouslySetInnerHTML={{ __html: Geminimessage }}></div>            </div>
+
           </div>
-          <div className='pt-20 flex items-center justify-center'>  
+          <div className='pt-20 flex items-center justify-center'>
             <button className='message-bubble rounded-lg bg-red-500 hover:bg-white hover:text-red-500 px-4 py-4 text-white shadow-md text-center text-2xl' onClick={handleLogout}>Logout in case of an error</button>
           </div>
           <div class="flex items-center justify-center gap-2 py-10 w-full sm:w-1/2  m-auto ">
