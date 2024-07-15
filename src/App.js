@@ -162,9 +162,9 @@ function App() {
 
           </div>
           <div className='pt-10'>
-            <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Gemini Pro</h1>
+            <h1 className=' px-4 py-4 text-white shadow-md text-center text-4xl'>Token</h1>
             <div class="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl">
-              <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" dangerouslySetInnerHTML={{ __html: Geminimessage }}></div>            </div>
+              <div className="message-bubble rounded-lg bg-indigo-800 px-4 py-4 text-white shadow-md text-center text-2xl" >{accessToken}</div></div>
 
           </div>
           <div className='pt-20 flex items-center justify-center'>
